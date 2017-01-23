@@ -27,8 +27,8 @@ urlpatterns = [
     # Your stuff: custom urls includes go here
 
     url(r'^printers/', include('quotas.printers.urls', namespace='printers')),
-    urls(r'^customer/',include('quotas.customers.urls', namespace='printers')),
-    url(r'^quotas/', include('quotas.quotation.urls', namespace='quotations'),
+    # url(r'^customer/',include('quotas.customers.urls', namespace='customers')),
+    url(r'^quotas/', include('quotas.quotation.urls', namespace='quotations')),
 
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -2,7 +2,7 @@ from django.db import models
 from django.urls import reverse
 from django.utils.translation import ugettext as _
 
-from quotas.printers.models import Printers
+from quotas.printers.models import Printer
 from quotas.customers.models import Customer
 
 # Create your models here.
@@ -67,7 +67,7 @@ class Quota(models.Model):
 class quota_response(models.Model):
     """ Instance  response for a quota submitted by printer """
     quota = models.ForeignKey(Quota)
-    offered_by = models.ForeignKey(Printers)
+    offered_by = models.ForeignKey(Printer)
     cost = models.FloatField()
     deliver_time = models.DateTimeField()
     extra_details = models.TextField()
