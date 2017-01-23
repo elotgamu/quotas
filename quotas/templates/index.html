@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Quotas app!</h1>
+    <h1>Printers subscribed</h1>
+
+    {% if printers %}
+        <ul>
+            {% for printer in printers %}
+                <li>
+                    <a title="{{ printer.name }}" href="{{ printer.get_absolute_url }}">{{ printer.name }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <h4>No printer registered yet!</h4>
+    {% endif %}
+{% endblock content %}

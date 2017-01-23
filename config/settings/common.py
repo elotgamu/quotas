@@ -40,13 +40,19 @@ THIRD_PARTY_APPS = (
     'allauth',  # registration
     'allauth.account',  # registration
     'allauth.socialaccount',  # registration
+    # 'allauth.socialaccount.providers.facebook',
+    'allauth.socialaccount.providers.google',
 )
 
 # Apps specific for this project go here.
 LOCAL_APPS = (
     # custom users app
     'quotas.users.apps.UsersConfig',
+    # 'quotas.users',
     # Your stuff: custom apps go here
+    'quotas.printers',
+    'quotas.customers',
+    'quotas.quotation',
 )
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
@@ -252,3 +258,11 @@ ADMIN_URL = r'^admin/'
 
 # Your common stuff: Below this line define 3rd party library settings
 # ------------------------------------------------------------------------------
+
+# Django-allauth provider settings
+SOCIALACCOUNT_PROVIDERS = {
+        'google': {
+            'SCOPE': ['profile', 'email'],
+            'AUTH_PARAMS': {'access_type': 'online'}
+        },
+    }

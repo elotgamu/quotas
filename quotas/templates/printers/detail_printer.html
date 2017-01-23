@@ -1,0 +1,7 @@
+{% extends "../base.html" %}
+{% block content %}
+    {% if printer %}
+        <h2>{{ printer.name }}</h2>
+        <p>email: {{ printer.email }}</p>
+    {% endif %}
+{% endblock content %}
