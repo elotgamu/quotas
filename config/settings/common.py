@@ -12,7 +12,7 @@ from __future__ import absolute_import, unicode_literals
 
 import environ
 
-ROOT_DIR = environ.Path(__file__) - 3  # (quotas/config/settings/common.py - 3 = quotas/)
+ROOT_DIR = environ.Path(__file__) - 3  # (quotas/config/settings/common.py - 3 = quotas/) # noqa
 APPS_DIR = ROOT_DIR.path('quotas')
 
 env = environ.Env()
@@ -46,13 +46,14 @@ THIRD_PARTY_APPS = (
 
 # Apps specific for this project go here.
 LOCAL_APPS = (
-    # custom users app
-    'quotas.users.apps.UsersConfig',
+    # custom users app,
+    # 'quotas.users.apps.UsersConfig',
     # 'quotas.users',
     # Your stuff: custom apps go here
     'quotas.printers',
     'quotas.customers',
     'quotas.quotation',
+    'quotas.products',
 )
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
@@ -171,7 +172,7 @@ TEMPLATES = [
 ]
 
 # See: http://django-crispy-forms.readthedocs.io/en/latest/install.html#template-packs
-CRISPY_TEMPLATE_PACK = 'bootstrap3'
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 # STATIC FILE CONFIGURATION
 # ------------------------------------------------------------------------------
@@ -238,16 +239,17 @@ AUTHENTICATION_BACKENDS = (
 ACCOUNT_AUTHENTICATION_METHOD = 'username'
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+# ACCOUNT_EMAIL_VERIFICATION = 'none'
 
-ACCOUNT_ALLOW_REGISTRATION = env.bool('DJANGO_ACCOUNT_ALLOW_REGISTRATION', True)
-ACCOUNT_ADAPTER = 'quotas.users.adapters.AccountAdapter'
-SOCIALACCOUNT_ADAPTER = 'quotas.users.adapters.SocialAccountAdapter'
+# ACCOUNT_ALLOW_REGISTRATION = env.bool('DJANGO_ACCOUNT_ALLOW_REGISTRATION', True)
+# ACCOUNT_ADAPTER = 'quotas.users.adapters.AccountAdapter'
+# SOCIALACCOUNT_ADAPTER = 'quotas.users.adapters.SocialAccountAdapter'
 
 # Custom user app defaults
 # Select the correct user model
-AUTH_USER_MODEL = 'users.User'
-LOGIN_REDIRECT_URL = 'users:redirect'
-LOGIN_URL = 'account_login'
+# AUTH_USER_MODEL = 'users.User'
+LOGIN_REDIRECT_URL = '/'
+LOGIN_URL = '/accounts/login/'
 
 # SLUGLIFIER
 AUTOSLUG_SLUGIFY_FUNCTION = 'slugify.slugify'

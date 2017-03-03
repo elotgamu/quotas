@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load crispy_forms_tags %}
+{% load account socialaccount %}
+
+{% block content %}
+<div class="col-sm-12 text-center">
+    <h1>Create an account as customer</h1>
+</div>
+
+<div class="social-signin">
+
+</div>
+
+<div class="col-sm-12  col-md-4 text-left">
+    <form class="new-customer-form" method="POST" action="{% url 'customers:new_customer' %}">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <a class="button secondaryAction" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
+        <button class="primaryAction" type="submit">{% trans "Sign up" %}</button>
+    </form>
+</div>
+
+{% endblock content %}

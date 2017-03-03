@@ -1,6 +1,7 @@
 from django.db import models
 from django.urls import reverse
-from django.conf import settings
+from django.contrib.auth.models import User
+from django.db.models.signals import post_save
 from django.template.defaultfilters import slugify
 from django.utils.translation import ugettext as _
 
@@ -10,7 +11,8 @@ from django.utils.translation import ugettext as _
 class Printer(models.Model):
     name = models.CharField(_('Name'), max_length=50)
     address = models.CharField(_('Address'), max_length=200)
-    user = models.OneToOneField(settings.AUTH_USER_MODEL,
+    email = models.EmailField(_('Email'), max_length=75)
+    user = models.OneToOneField(User,
                                 related_name='printers_profile')
     phone = models.CharField(_('Telephone'), max_length=75, blank=True)
     bio = models.TextField()
@@ -37,3 +39,11 @@ class Printer(models.Model):
 
     def get_absolute_url(self):
         return reverse('printer-detail', kwargs={'slug': self.slug})
+
+
+def save_printer_profile(sender, instance, created, **kwargs):
+    if created:
+        Printer.objects.create(user=instance)
+
+
+post_save.connect(save_printer_profile, sender=User)

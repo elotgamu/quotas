@@ -3,7 +3,10 @@ from django.views.generic import ListView, TemplateView
 from django.views.generic.edit import CreateView
 from django.views.generic.detail import DetailView
 
+from django.contrib.auth.mixins import LoginRequiredMixin
+
 from .models import Printer
+from .forms import Printercreation_form
 
 # Create your views here.
 
@@ -14,9 +17,19 @@ class IndexView(TemplateView):
     context_object_name = 'printers'
 
 
-class Printer_Create(CreateView):
+class Printer_Create(LoginRequiredMixin, CreateView):
     model = Printer
-    template_name = "TEMPLATE_NAME"
+    form_class = Printercreation_form
+    template_name = "printers/printer_create.html"
+
+    def get_form_kwargs(self):
+        kwargs = super(Printer_Create, self).get_form_kwargs()
+        kwargs['email'] = self.request.user.email
+        return kwargs
+
+    def form_valid(self, form):
+        self.form.user = self.request.user
+        return super(Printer_Create, self).form_valid(form)
 
 
 class Printer_Detail(DetailView):

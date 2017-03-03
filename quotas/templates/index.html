@@ -14,5 +14,11 @@
         </ul>
     {% else %}
         <h4>No printer registered yet!</h4>
+        <p>Register your printer <a href="{% url 'printers:printer-add' %}">here</a>.</p>
     {% endif %}
+
+    <h1>Customer space</h1>
+    <p>Envie su primera cotizacion: <a href="{% url 'customers:new_customer' %}">Here</a></p>
+
+    <p>Check who has already registered to submit quotas <a href="{% url 'customers:customer-list' %}">here</a>.</p>
 {% endblock content %}

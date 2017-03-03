@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+    {% if customers %}
+        <div class="customer-list-cont">
+            <ul class="customer-list">
+            {% for customer in customers  %}
+                <li>
+                    {{ customer.first_name }} {{customer.last_name }}
+                </li>
+            {% endfor %}
+            </ul>
+        </div>
+    {% else %}
+        <div class="customer-list-cont">
+            <h1>Sorry no customers yet!!!</h1>
+            <p>Have you tried hire a sales rep to get to know this app? ;-)</p>
+        </div>
+    {% endif %}
+
+
+{% endblock content %}

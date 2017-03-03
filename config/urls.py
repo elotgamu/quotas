@@ -21,13 +21,13 @@ urlpatterns = [
     url(settings.ADMIN_URL, admin.site.urls),
 
     # User management
-    url(r'^users/', include('quotas.users.urls', namespace='users')),
+    # url(r'^users/', include('quotas.users.urls', namespace='users')),
     url(r'^accounts/', include('allauth.urls')),
 
     # Your stuff: custom urls includes go here
 
     url(r'^printers/', include('quotas.printers.urls', namespace='printers')),
-    # url(r'^customer/',include('quotas.customers.urls', namespace='customers')),
+    url(r'^customer/', include('quotas.customers.urls', namespace='customers')), # noqa
     url(r'^quotas/', include('quotas.quotation.urls', namespace='quotations')),
 
 
@@ -46,7 +46,7 @@ if settings.DEBUG:
         url(r'^500/$', default_views.server_error),
     ]
     if 'debug_toolbar' in settings.INSTALLED_APPS:
-        import debug_toolbar
+        import debug_toolbar # noqa
 
         urlpatterns += [
             url(r'^__debug__/', include(debug_toolbar.urls)),
